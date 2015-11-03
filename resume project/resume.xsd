@@ -1,0 +1,153 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.resume.com/schemas/org" xmlns="http://www.resume.com/schemas/org"
+    xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+    jxb:version="2.0"
+	elementFormDefault="qualified">
+	<xs:element name="resume">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="career_objective">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:minLength value="50"></xs:minLength>
+							<xs:maxLength value="100"></xs:maxLength>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="qualifications">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="qualification" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="examination" type="xs:string"></xs:element>
+										<xs:element name="college" type="xs:string"></xs:element>
+										<xs:element name="board_school" type="xs:string"></xs:element>
+										<xs:element name="year" type="xs:string"></xs:element>
+										<xs:element name="percentage" type="xs:string"></xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="technical_skills">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="programming_language" type="xs:string"></xs:element>
+							<xs:element name="database" type="xs:string"></xs:element>
+							<xs:element name="operating_system" type="xs:string"></xs:element>
+							<xs:element name="others" type="xs:string"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="projects">
+
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="project" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="project_type" type="xs:string"> </xs:element>
+
+										<xs:element name="project_start" type="xs:date"></xs:element>
+										<xs:element name="project_end" type="xs:date"></xs:element>
+										<xs:element name="project_title" type="xs:string"></xs:element>
+										<xs:element name="description">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="100"></xs:minLength>
+													<xs:maxLength value="300"></xs:maxLength>
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="seminars_attended" type="xs:string"></xs:element>
+				<xs:element name="acchievements" type="xs:string"></xs:element>
+				<xs:element name="personal_details">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string"></xs:element>
+							<xs:element name="father_name" type="xs:string"></xs:element>
+							<xs:element name="gender">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="male"></xs:enumeration>
+										<xs:enumeration value="female"></xs:enumeration>
+										<xs:enumeration value="other"></xs:enumeration>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="dob" type="xs:string"></xs:element>
+							<xs:element name="marital_status" type="EnumMaritalStatus">
+
+							</xs:element>
+							<xs:element name="nationality" type="xs:string"></xs:element>
+							<xs:element name="spoken_languages" type="xs:string"></xs:element>
+							<xs:element name="address" type="contact_details"></xs:element>
+							<xs:element name="permenent_address" type="Address"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+
+
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="Address">
+		<xs:sequence>
+			<xs:element name="street" type="xs:string"></xs:element>
+			<xs:element name="landmark" type="xs:string"></xs:element>
+			<xs:element name="area" type="xs:string"></xs:element>
+
+			<xs:element name="city" type="xs:string"></xs:element>
+			<xs:element name="state" type="xs:string"></xs:element>
+
+			<xs:element name="country" type="xs:string"></xs:element>
+			<xs:element name="zipcode" type="xs:string"></xs:element>
+
+
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="contact_details">
+		<xs:complexContent>
+			<xs:extension base="Address">
+				<xs:sequence>
+					<xs:element name="phone_no" type="xs:int"></xs:element>
+					<xs:element name="emailId" type="xs:string"></xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+    <xs:simpleType name="EnumMaritalStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Married">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <jxb:typesafeEnumMember name="Married"/>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Unmarried">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <jxb:typesafeEnumMember name="Unmarried"/>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Married_But_Alone">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <jxb:typesafeEnumMember name="Married_But_Alone"/>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
